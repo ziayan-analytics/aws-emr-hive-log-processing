@@ -86,7 +86,8 @@ Executed HiveQL to compute **request volume grouped by operating system** within
 
 ### 6) Validate Outputs in Amazon S3
 Downloaded output result files (e.g., `000000_0`, `000001_0`) from:
-- `s3://<your-bucket>/os_requests/`
+- `s3://hadoop3023/os_requests/`
+- Each output file is a plain text file with the format: <OS><TAB><request_count>
 
 Validated results containing OS request counts:
 Aggregated number of CloudFront access requests by OS:
