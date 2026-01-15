@@ -39,6 +39,8 @@ This project demonstrates an end-to-end cloud data processing workflow on AWS to
 - Created an EMR cluster with pre-installed applications:
   - Hadoop
   - Hive
+  - Hue
+  - Pig
   - (Spark/Zeppelin included by EMR stack)
 - Verified cluster configuration and node availability
 
@@ -46,13 +48,14 @@ This project demonstrates an end-to-end cloud data processing workflow on AWS to
 
 ### 2) Run Hive Script as an EMR Step
 - Added an EMR **Step** using *Hive program*
+- Tested on EMR 5.36.1
 - Configured:
   - **Hive script location (S3)**:  
-    `s3://<REGION>.elasticmapreduce.samples/cloudfront/code/Hive_CloudFront.q`
+    `s3://us-east-1.elasticmapreduce.samples/cloudfront/code/Hive_CloudFront.q`
   - **Input S3 location**:  
-    `s3://<REGION>.elasticmapreduce.samples`
+    `s3://us-east-1.elasticmapreduce.samples`
   - **Output S3 location**:  
-    `s3://<your-bucket>/os_requests/`
+    `s3://hadoop3023/os_requests/`
   - Optional arguments:  
     `-hiveconf hive.support.sql11.reserved.keywords=false`
 
@@ -85,12 +88,28 @@ Executed HiveQL to compute **request volume grouped by operating system** within
 Downloaded output result files (e.g., `000000_0`, `000001_0`) from:
 - `s3://<your-bucket>/os_requests/`
 
-Validated results containing OS request counts, e.g.:
-- Android
-- Windows
-- MacOS
-- Linux
-- iOS
+Validated results containing OS request counts:
+Aggregated number of CloudFront access requests by OS:
+
+| OS        | Requests |
+|----------|----------|
+| Linux    | 813      |
+| MacOS    | 852      |
+| OS X     | 799      |
+| iOS      | 794      |
+| Android  | 855      |
+| Windows  | 883      |
+
+---
+
+## Why EMR + Hive?
+
+Although this dataset sample is small, the same workflow scales to **millions of log records** by distributing processing across multiple nodes.
+
+Key advantages:
+- Hive enables SQL-like querying on large log files
+- EMR provides scalable compute resources without managing servers manually
+- S3 acts as both data lake storage and output destination
 
 ---
 
