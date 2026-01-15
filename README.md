@@ -66,7 +66,7 @@ flowchart LR
 ![EMR Cluster](images/EMR%20Cluster.png)
 
 
----
+
 
 ### 2) Run Hive Script as an EMR Step
 - Added an EMR **Step** using *Hive program*
@@ -87,20 +87,19 @@ Monitored step lifecycle: `Pending → Running → Completed`
 ![EMR Step](images/a%20step.png)
 
 
----
 
 ### 3) Create Hive External Table (Schema Definition)
 The Hive script creates an external table (e.g., `cloudfront_logs`) with structured columns such as:
 - date, time, requestIP, method, uri, status
 - OS, browser, browserVersion, etc.
 
----
+
 
 ### 4) Parse Logs with RegexSerDe
 Used **RegexSerDe** to extract fields from raw log lines and map them into table columns.  
 This enables SQL-like querying directly over text-based CloudFront logs.
 
----
+
 
 ### 5) Aggregate Results with HiveQL
 Executed HiveQL to compute **request volume grouped by operating system** within a time window:
@@ -114,7 +113,7 @@ Executed HiveQL to compute **request volume grouped by operating system** within
 ![HiveQL CLI Output 2](images/CLI%202.png)
 
 
----
+
 
 ### 6) Validate Outputs in Amazon S3
 Downloaded output result files (e.g., `000000_0`, `000001_0`) from:
@@ -189,7 +188,7 @@ GROUP BY os;
 - EC2 Key pair for SSH into EMR (example: `EMRKey-lab`)
 - Region: `us-east-1`
 
----
+
 
 ### Step 1 — Create an S3 bucket
 Create a bucket in `us-east-1`, for example:
@@ -199,7 +198,7 @@ This bucket is used for:
 - EMR logs
 - Hive output directory (`os_requests/`)
 
----
+
 
 ### Step 2 — Create an EMR cluster
 In EMR Console:
@@ -209,7 +208,7 @@ In EMR Console:
 - Log destination: `s3://hadoop3023/`
 - EC2 key pair: `EMRKey-lab`
 
----
+
 
 ### Step 3 — Run Hive script as an EMR Step
 In EMR → Steps → Add step:
@@ -227,7 +226,7 @@ In EMR → Steps → Add step:
 Monitor the step status:
 `Pending → Running → Completed`
 
----
+
 
 ### Step 4 — Validate output in S3
 After completion, results are available at:
