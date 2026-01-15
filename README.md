@@ -22,8 +22,22 @@ This project demonstrates an end-to-end cloud data processing workflow on AWS to
 - **Processing**: Hive external table + RegexSerDe parsing + HiveQL aggregation
 - **Output**: Query results written to Amazon S3 folder (`os_requests/`)
 
+
+
+```mermaid
+flowchart LR
+    A[S3: Raw CloudFront Logs\ns3://us-east-1.elasticmapreduce.samples] --> B[Amazon EMR Cluster\nHadoop + Hive]
+    B --> C[Hive External Table\ncloudfront_logs]
+    C --> D[RegexSerDe Parsing\nExtract fields into columns]
+    D --> E[HiveQL Aggregation\nCOUNT(*) GROUP BY os]
+    E --> F[S3: Query Output\ns3://hadoop3023/os_requests/]
+    F --> G[Download & Validate Outputs\n000000_0, 000001_0]
+```
+
+
 ### S3 Bucket (Input/Output Storage)
 ![S3 Bucket](images/bucket.png)
+
 
 ---
 
