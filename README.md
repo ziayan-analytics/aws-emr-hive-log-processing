@@ -56,7 +56,7 @@ flowchart LR
 ---
 
 ## Workflow
---
+---
 ### 1) Provision EMR Cluster
 - Created an EMR cluster with pre-installed applications:
   - Hadoop
@@ -68,7 +68,7 @@ flowchart LR
 
 ### EMR Cluster Provisioned
 ![EMR Cluster Provisioned](images/emrcluster.png)
---
+---
 
 ### 2) Run Hive Script as an EMR Step
 - Added an EMR **Step** using *Hive program*
@@ -87,18 +87,18 @@ Monitored step lifecycle: `Pending → Running → Completed`
 
 ### EMR Step: Run Hive Script
 ![EMR Step](images/a%20step.png)
-
+---
 
 ### 3) Create Hive External Table (Schema Definition)
 The Hive script creates an external table (e.g., `cloudfront_logs`) with structured columns such as:
 - date, time, requestIP, method, uri, status
 - OS, browser, browserVersion, etc.
-
+---
 
 ### 4) Parse Logs with RegexSerDe
 Used **RegexSerDe** to extract fields from raw log lines and map them into table columns.  
 This enables SQL-like querying directly over text-based CloudFront logs.
-
+---
 
 ### 5) Aggregate Results with HiveQL
 Executed HiveQL to compute **request volume grouped by operating system** within a time window:
@@ -111,7 +111,7 @@ Executed HiveQL to compute **request volume grouped by operating system** within
 
 ![HiveQL CLI Output 2](images/CLI%202.png)
 
-
+---
 
 ### 6) Validate Outputs in Amazon S3
 Downloaded output result files (e.g., `000000_0`, `000001_0`) from:
