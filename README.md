@@ -1,0 +1,1 @@
+# aws-emr-hive-log-processing
