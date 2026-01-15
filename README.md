@@ -61,6 +61,7 @@ This project demonstrates an end-to-end cloud data processing workflow on AWS to
 
 Monitored step lifecycle: `Pending → Running → Completed`
 
+
 ---
 
 ### 3) Create Hive External Table (Schema Definition)
@@ -133,3 +134,13 @@ Key advantages:
 - Convert output to partitioned parquet format in S3 for faster query performance
 - Add Athena/Glue catalog for serverless querying
 - Automate pipeline using Airflow or AWS Step Functions
+
+### HiveQL Query
+```sql
+SELECT
+  os,
+  COUNT(*) AS count
+FROM cloudfront_logs
+WHERE dateobject BETWEEN '2014-07-05' AND '2014-08-05'
+GROUP BY os;
+
