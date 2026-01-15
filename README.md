@@ -1,4 +1,4 @@
-# aws-emr-hive-log-processing
+
 # CloudFront Log Processing with AWS EMR (HiveQL) & Amazon S3
 
 ## Overview
