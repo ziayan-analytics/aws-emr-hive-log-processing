@@ -28,7 +28,7 @@ Example (key permission):
 chmod 400 ~/EMRKey-lab.pem
 ```
 
-1) List EMR clusters (find the correct one)
+## 1) List EMR clusters (find the correct one)
 ```bash
 
 aws emr list-clusters --active --region us-east-1
@@ -40,7 +40,7 @@ If your cluster is already terminated (not active), use:
 aws emr list-clusters --cluster-states TERMINATED --region us-east-1
 ```
 
-2) Get EMR Cluster ID (store into variable)
+## 2) Get EMR Cluster ID (store into variable)
 Option A (pick the first cluster in the list):
 
 ```bash
@@ -59,7 +59,7 @@ export ID=$(aws emr list-clusters --active --region us-east-1 \
 echo $ID
 ```
 
-3) Get EMR master node Public DNS
+## 3) Get EMR master node Public DNS
 ```bash
 
 export HOST=$(aws emr describe-cluster --cluster-id $ID --region us-east-1 \
@@ -67,7 +67,7 @@ export HOST=$(aws emr describe-cluster --cluster-id $ID --region us-east-1 \
 echo $HOST
 ```
 
-4) SSH into EMR master node
+## 4) SSH into EMR master node
 ```bash
 
 ssh -i ~/EMRKey-lab.pem hadoop@$HOST
@@ -86,7 +86,7 @@ Type:
 yes
 ```
 
-5) Open Hive on EMR
+## 5) Open Hive on EMR
 After SSH into master node:
 
 ```bash
@@ -100,7 +100,7 @@ You should see a prompt like:
 hive>
 ```
 
-6) Verify Hive tables (optional)
+## 6) Verify Hive tables (optional)
 ```sql
 
 SHOW DATABASES;
@@ -126,7 +126,7 @@ Confirm cloudfront_logs exists:
 DESCRIBE cloudfront_logs;
 ```
 
-7) Run the HiveQL query (OS request counts)
+## 7) Run the HiveQL query (OS request counts)
 This is the main query you executed on the EMR cluster:
 
 ```sql
@@ -151,7 +151,7 @@ Expected output: aggregated OS counts such as:
 
 -iOS
 
-8) Write query output back to S3 (recommended)
+## 8) Write query output back to S3 (recommended)
 To save results into S3 output folder:
 
 ```sql
@@ -171,7 +171,7 @@ This produces output part files in S3 (example):
 
 -000001_0
 
-9) Exit Hive and SSH session
+## 9) Exit Hive and SSH session
 Exit Hive:
 
 ```sql
@@ -185,7 +185,7 @@ Exit EMR SSH:
 exit
 ```
 
-10) Download results from S3 (local validation)
+## 10) Download results from S3 (local validation)
 List output files:
 
 ```bash
@@ -208,8 +208,8 @@ cat output/000000_0
 cat output/000001_0
 ```
 
-Troubleshooting
-A) SSH Permission denied (publickey)
+# Troubleshooting
+## A) SSH Permission denied (publickey)
 Key permission may be wrong → run:
 
 ```bash
