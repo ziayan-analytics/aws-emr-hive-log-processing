@@ -175,3 +175,66 @@ FROM cloudfront_logs
 WHERE dateobject BETWEEN '2014-07-05' AND '2014-08-05'
 GROUP BY os;
 
+```
+
+```md
+---
+
+## How to Reproduce
+
+### Prerequisites
+- AWS account with permissions for **EMR + S3 + IAM**
+- An S3 bucket for EMR logs + output (example: `hadoop3023`)
+- EC2 Key pair for SSH into EMR (example: `EMRKey-lab`)
+- Region: `us-east-1`
+
+---
+
+### Step 1 — Create an S3 bucket
+Create a bucket in `us-east-1`, for example:
+- `hadoop3023`
+
+This bucket is used for:
+- EMR logs
+- Hive output directory (`os_requests/`)
+
+---
+
+### Step 2 — Create an EMR cluster
+In EMR Console:
+- Release label: **EMR 5.36.1** (recommended for this lab)
+- Applications: **Hadoop + Hive**
+- Cluster nodes: 1 Primary + 1 Core + 1 Task (lab default)
+- Log destination: `s3://hadoop3023/`
+- EC2 key pair: `EMRKey-lab`
+
+---
+
+### Step 3 — Run Hive script as an EMR Step
+In EMR → Steps → Add step:
+- Type: **Hive program**
+- Name: `Process logs`
+- Hive script location:
+  - `s3://us-east-1.elasticmapreduce.samples/cloudfront/code/Hive_CloudFront.q`
+- Input S3 location:
+  - `s3://us-east-1.elasticmapreduce.samples`
+- Output S3 location:
+  - `s3://hadoop3023/os_requests/`
+- Optional arguments:
+  - `-hiveconf hive.support.sql11.reserved.keywords=false`
+
+Monitor the step status:
+`Pending → Running → Completed`
+
+---
+
+### Step 4 — Validate output in S3
+After completion, results are available at:
+- `s3://hadoop3023/os_requests/`
+
+Download output files:
+- `000000_0`
+- `000001_0`
+
+Each file contains OS request counts produced by HiveQL.
+```
