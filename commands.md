@@ -218,7 +218,7 @@ chmod 400 ~/EMRKey-lab.pem
 ```
 Ensure you selected the correct keypair during cluster creation.
 
-B) Hive table not found: cloudfront_logs
+## B) Hive table not found: cloudfront_logs
 You likely have not executed the Hive script yet.
 
 Option 1: run step through EMR console
@@ -230,7 +230,7 @@ hive -f /home/hadoop/Hive_CloudFront.q
 ```
 (If you don’t have the script locally, download it from S3 first.)
 
-C) No output files in S3
+## C) No output files in S3
 Check:
 
 -Your INSERT OVERWRITE DIRECTORY path is correct
@@ -239,7 +239,7 @@ Check:
 
 -Look at EMR step logs (stderr, stdout)
 
-References
+# References
 -EMR UI screenshots: see /images/
 
 -Output samples: see /output/ (if included in repo)
