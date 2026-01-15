@@ -4,6 +4,8 @@
 ## Overview
 This project demonstrates an end-to-end cloud data processing workflow on AWS to parse and analyze semi-structured CloudFront access logs using **Amazon EMR (Hadoop + Hive)**. The pipeline ingests raw logs from **Amazon S3**, converts them into a structured format via **Hive External Tables** + **RegexSerDe**, runs **HiveQL** aggregation queries, and writes query outputs back to S3 for downstream analytics.
 
+
+
 ---
 
 ## Objectives
@@ -11,6 +13,8 @@ This project demonstrates an end-to-end cloud data processing workflow on AWS to
 - Build a structured schema in Hive for raw CloudFront logs
 - Generate analytical insights (requests by operating system) using HiveQL
 - Export query results back to S3
+  
+
 
 ---
 
@@ -21,8 +25,6 @@ This project demonstrates an end-to-end cloud data processing workflow on AWS to
 - **Compute**: Amazon EMR Cluster (Hadoop ecosystem with Hive)
 - **Processing**: Hive external table + RegexSerDe parsing + HiveQL aggregation
 - **Output**: Query results written to Amazon S3 folder (`os_requests/`)
-
-
 
 ```mermaid
 flowchart LR
@@ -35,9 +37,9 @@ flowchart LR
 
 ```
 
-
 ### S3 Bucket (Input/Output Storage)
 ![S3 Bucket](images/bucket.png)
+
 
 
 ---
@@ -48,6 +50,8 @@ flowchart LR
 - **Amazon S3** (data lake storage: input + output)
 - **RegexSerDe** for parsing log text files
 - Distributed computing concepts: cluster-based execution, parallel processing
+
+
 
 ---
 
@@ -64,8 +68,6 @@ flowchart LR
 
 ### EMR Cluster Provisioned
 ![EMR Cluster Provisioned](images/emrcluster.png)
-
-
 
 
 ### 2) Run Hive Script as an EMR Step
@@ -87,18 +89,15 @@ Monitored step lifecycle: `Pending → Running → Completed`
 ![EMR Step](images/a%20step.png)
 
 
-
 ### 3) Create Hive External Table (Schema Definition)
 The Hive script creates an external table (e.g., `cloudfront_logs`) with structured columns such as:
 - date, time, requestIP, method, uri, status
 - OS, browser, browserVersion, etc.
 
 
-
 ### 4) Parse Logs with RegexSerDe
 Used **RegexSerDe** to extract fields from raw log lines and map them into table columns.  
 This enables SQL-like querying directly over text-based CloudFront logs.
-
 
 
 ### 5) Aggregate Results with HiveQL
@@ -111,7 +110,6 @@ Executed HiveQL to compute **request volume grouped by operating system** within
 ![HiveQL CLI Output 1](images/CLI%201.png)
 
 ![HiveQL CLI Output 2](images/CLI%202.png)
-
 
 
 
@@ -132,6 +130,9 @@ Aggregated number of CloudFront access requests by OS:
 | Android  | 855      |
 | Windows  | 883      |
 
+
+
+
 ---
 
 ## Why EMR + Hive?
@@ -143,12 +144,16 @@ Key advantages:
 - EMR provides scalable compute resources without managing servers manually
 - S3 acts as both data lake storage and output destination
 
+
+
 ---
 
 ## Results
 - Successfully processed CloudFront access logs via distributed Hive execution on EMR
 - Produced structured output files in S3 containing aggregated metrics:
   **requests per operating system**
+
+
 
 ---
 
@@ -158,12 +163,16 @@ Key advantages:
   - `<REGION>`
   - `<your-bucket>`
 
+
+
 ---
 
 ## Future Improvements
 - Convert output to partitioned parquet format in S3 for faster query performance
 - Add Athena/Glue catalog for serverless querying
 - Automate pipeline using Airflow or AWS Step Functions
+
+
 
 ---
 
@@ -178,6 +187,8 @@ GROUP BY os;
 
 ```
 
+
+
 ---
 
 ## How to Reproduce
@@ -189,7 +200,6 @@ GROUP BY os;
 - Region: `us-east-1`
 
 
-
 ### Step 1 — Create an S3 bucket
 Create a bucket in `us-east-1`, for example:
 - `hadoop3023`
@@ -199,7 +209,6 @@ This bucket is used for:
 - Hive output directory (`os_requests/`)
 
 
-
 ### Step 2 — Create an EMR cluster
 In EMR Console:
 - Release label: **EMR 5.36.1** (recommended for this lab)
@@ -207,7 +216,6 @@ In EMR Console:
 - Cluster nodes: 1 Primary + 1 Core + 1 Task (lab default)
 - Log destination: `s3://hadoop3023/`
 - EC2 key pair: `EMRKey-lab`
-
 
 
 ### Step 3 — Run Hive script as an EMR Step
@@ -225,7 +233,6 @@ In EMR → Steps → Add step:
 
 Monitor the step status:
 `Pending → Running → Completed`
-
 
 
 ### Step 4 — Validate output in S3
