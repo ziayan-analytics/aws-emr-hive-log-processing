@@ -47,6 +47,10 @@ This project demonstrates an end-to-end cloud data processing workflow on AWS to
   - (Spark/Zeppelin included by EMR stack)
 - Verified cluster configuration and node availability
 
+### EMR Cluster Provisioned
+![EMR Cluster](images/EMR%20Cluster.png)
+
+
 ---
 
 ### 2) Run Hive Script as an EMR Step
@@ -63,6 +67,9 @@ This project demonstrates an end-to-end cloud data processing workflow on AWS to
     `-hiveconf hive.support.sql11.reserved.keywords=false`
 
 Monitored step lifecycle: `Pending → Running → Completed`
+
+### EMR Step: Run Hive Script
+![EMR Step](images/a%20step.png)
 
 
 ---
@@ -85,6 +92,12 @@ Executed HiveQL to compute **request volume grouped by operating system** within
 
 - Query outputs are written into the target S3 output directory using:
   `INSERT OVERWRITE DIRECTORY ...`
+
+### HiveQL Query Execution (EMR CLI)
+![HiveQL CLI Output 1](images/CLI%201.png)
+
+![HiveQL CLI Output 2](images/CLI%202.png)
+
 
 ---
 
