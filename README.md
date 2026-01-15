@@ -26,12 +26,13 @@ This project demonstrates an end-to-end cloud data processing workflow on AWS to
 
 ```mermaid
 flowchart LR
-    A[S3: Raw CloudFront Logs\ns3://us-east-1.elasticmapreduce.samples] --> B[Amazon EMR Cluster\nHadoop + Hive]
-    B --> C[Hive External Table\ncloudfront_logs]
-    C --> D[RegexSerDe Parsing\nExtract fields into columns]
-    D --> E[HiveQL Aggregation\nCOUNT(*) GROUP BY os]
-    E --> F[S3: Query Output\ns3://hadoop3023/os_requests/]
-    F --> G[Download & Validate Outputs\n000000_0, 000001_0]
+    A[S3: Raw CloudFront Logs<br/>s3://us-east-1.elasticmapreduce.samples] --> B[Amazon EMR Cluster<br/>Hadoop + Hive]
+    B --> C[Hive External Table<br/>cloudfront_logs]
+    C --> D[RegexSerDe Parsing<br/>Extract fields into columns]
+    D --> E[HiveQL Aggregation<br/>COUNT_all GROUP BY os]
+    E --> F[S3: Query Output<br/>s3://hadoop3023/os_requests/]
+    F --> G[Download & Validate Outputs<br/>000000_0, 000001_0]
+
 ```
 
 
