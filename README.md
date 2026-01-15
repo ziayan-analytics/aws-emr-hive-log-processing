@@ -56,7 +56,7 @@ flowchart LR
 ---
 
 ## Workflow
-
+--
 ### 1) Provision EMR Cluster
 - Created an EMR cluster with pre-installed applications:
   - Hadoop
@@ -68,7 +68,7 @@ flowchart LR
 
 ### EMR Cluster Provisioned
 ![EMR Cluster Provisioned](images/emrcluster.png)
-
+--
 
 ### 2) Run Hive Script as an EMR Step
 - Added an EMR **Step** using *Hive program*
