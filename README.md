@@ -166,6 +166,8 @@ Key advantages:
 - Add Athena/Glue catalog for serverless querying
 - Automate pipeline using Airflow or AWS Step Functions
 
+---
+
 ### HiveQL Query
 ```sql
 SELECT
@@ -177,7 +179,6 @@ GROUP BY os;
 
 ```
 
-```md
 ---
 
 ## How to Reproduce
@@ -237,4 +238,4 @@ Download output files:
 - `000001_0`
 
 Each file contains OS request counts produced by HiveQL.
-```
+
