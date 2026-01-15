@@ -22,6 +22,9 @@ This project demonstrates an end-to-end cloud data processing workflow on AWS to
 - **Processing**: Hive external table + RegexSerDe parsing + HiveQL aggregation
 - **Output**: Query results written to Amazon S3 folder (`os_requests/`)
 
+### S3 Bucket (Input/Output Storage)
+![S3 Bucket](images/bucket.png)
+
 ---
 
 ## Tech Stack
