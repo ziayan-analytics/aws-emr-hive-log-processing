@@ -63,7 +63,7 @@ flowchart LR
 - Verified cluster configuration and node availability
 
 ### EMR Cluster Provisioned
-![EMR Cluster](images/EMR%20Cluster.png)
+![EMR Cluster Provisioned](images/emrcluster.png)
 
 
 
